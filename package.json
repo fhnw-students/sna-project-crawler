@@ -1,0 +1,19 @@
+{
+  "name": "sna-project-crawler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fhnw-students/sna-project-crawler.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fhnw-students/sna-project-crawler/issues"
+  },
+  "homepage": "https://github.com/fhnw-students/sna-project-crawler#readme"
+}
