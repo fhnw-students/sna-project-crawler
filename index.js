@@ -1,4 +1,6 @@
 const request = require('request');
+const fs = require('fs');
+
 const gexf = require('gexf');
 const myGexf = gexf.create();
 
@@ -6,17 +8,7 @@ getRepos((repos) => {
 	console.log(repos.length);
 });
 
-
-
-// TODO export to a .gexf file
-// SEE: https://nodejs.org/api/fs.html
-// As a document
-var gephiAsJson = myGexf.document;
-
-// As a string
-var gephiAsXml = myGexf.serialize();
-
-// console.log(gephiAsXml);
+createGexfFile();
 
 
 ///////////////////////////////
@@ -35,5 +27,26 @@ function getRepos(done) {
 		if (!error && response.statusCode == 200) {
 			done(JSON.parse(body));
 		}
+	});
+}
+
+function createGexfFile() {
+	var filename = 'github.gexf';
+	// As a document
+	var gephiAsJson = myGexf.document;
+
+	// As a string
+	var gephiAsXml = myGexf.serialize();
+	fs.exists(filename, (exists) => {
+		if (exists) {
+			fs.unlink(filename, (err) => {
+				if (err) throw err;
+				console.log('successfully deleted');
+			});
+		}
+		fs.writeFile(filename, gephiAsXml, (err) => {
+			if (err) throw err;
+			console.log('It\'s saved!');
+		});
 	});
 }
