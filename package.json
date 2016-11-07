@@ -18,6 +18,7 @@
   "homepage": "https://github.com/fhnw-students/sna-project-crawler#readme",
   "dependencies": {
     "gexf": "^0.2.5",
+    "prompt": "^1.0.0",
     "request": "^2.76.0",
     "winston": "^2.3.0"
   }
