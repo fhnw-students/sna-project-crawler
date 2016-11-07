@@ -2,10 +2,13 @@ const request = require('request');
 const fs = require('fs');
 
 const gexf = require('gexf');
+const logger = require('./logger');
 const myGexf = gexf.create();
 
+logger.info('Starting crawling');
+
 getRepos((repos) => {
-	console.log(repos.length);
+	logger.info(repos.length);
 });
 
 createGexfFile();
@@ -41,12 +44,12 @@ function createGexfFile() {
 		if (exists) {
 			fs.unlink(filename, (err) => {
 				if (err) throw err;
-				console.log('successfully deleted');
+				logger.info('successfully deleted');
 			});
 		}
 		fs.writeFile(filename, gephiAsXml, (err) => {
 			if (err) throw err;
-			console.log('It\'s saved!');
+			logger.info('It\'s saved!');
 		});
 	});
 }
