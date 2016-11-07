@@ -19,35 +19,35 @@ logger.info('Starting crawling');
 
 class User {
 
-	constructor(login, name) {
-		this.login = login;
-		this.name = name;
-		this.langs = [];
-	}
+    constructor(login, name) {
+        this.login = login;
+        this.name = name;
+        this.langs = [];
+    }
 
 }
 
 const users = [];
-getUser('dweber019')
-	.then((user) => {
-		let newUser = new User(user.login, user.name);
-		users.push(newUser);
-		getUsersRepos(user.login).then((repos) => {
-			let queue = [];
-			repos.forEach((repo) => {
-				queue.push(getUserRepoLang(user.login, repo.name).then((langs) => {
-					for (var key in langs) {
-						if (langs.hasOwnProperty(key) && newUser.langs.indexOf(key) < 0) {
-							newUser.langs.push(key);
-						}
-					}
-				}));
-			});
-			Promise.all(queue).then(() => {
-				logger.info('done', users);
-			});
-		});
-	});
+getUser('hirsch88')
+    .then((user) => {
+        let newUser = new User(user.login, user.name);
+        users.push(newUser);
+        getUsersRepos(user.login).then((repos) => {
+            let queue = [];
+            repos.forEach((repo) => {
+                queue.push(getUserRepoLang(user.login, repo.name).then((langs) => {
+                    for (var key in langs) {
+                        if (langs.hasOwnProperty(key) && newUser.langs.indexOf(key) < 0) {
+                            newUser.langs.push(key);
+                        }
+                    }
+                }));
+            });
+            Promise.all(queue).then(() => {
+                logger.info('done', users);
+            }).catch(logger.error);
+        }).catch(logger.error);
+    }).catch(logger.error);
 
 
 // getUser(name, (user) => {
@@ -70,66 +70,75 @@ getUser('dweber019')
 
 ///////////////////////////////
 const myGexf = gexf.create({
-	defaultEdgeType: "directed",
-	model: {
-		node: [
-			{
-				id: "name",
-				type: "string",
-				title: "Author's name"
-			},
-			{
-				id: "surname",
-				type: "string",
-				title: "Author's surname"
-			}
-		],
-		edge: [
-			{
-				id: "predicate",
-				type: "string",
-				title: "predicate"
-			}
-		]
-	}
+    defaultEdgeType: "directed",
+    model: {
+        node: [
+            {
+                id: "name",
+                type: "string",
+                title: "Author's name"
+            },
+            {
+                id: "surname",
+                type: "string",
+                title: "Author's surname"
+            }
+        ],
+        edge: [
+            {
+                id: "predicate",
+                type: "string",
+                title: "predicate"
+            }
+        ]
+    }
 });
 ///////////////////////////////
 
 function getUser(userLogin) {
-	return new Promise((resovle) => {
-		request(getRequestOptions('/users/' + userLogin), (error, response, body) => {
-			if (!error && response.statusCode == 200) {
-				resovle(JSON.parse(body));
-			} else {
-				reject();
-			}
-		});
-	});
+    return new Promise((resovle, reject) => {
+        request(getRequestOptions('/users/' + userLogin), (error, response, body) => {
+            if (!error && response.statusCode == 200) {
+                resovle(JSON.parse(body));
+            } else {
+                reject({
+                    error: error,
+                    status: response.statusCode,
+                });
+            }
+        });
+    });
 }
 
 function getUsersRepos(userLogin) {
-	return new Promise((resovle) => {
-		request(getRequestOptions('/users/' + userLogin + '/repos'), (error, response, body) => {
-			if (!error && response.statusCode == 200) {
-				resovle(JSON.parse(body));
-			} else {
-				reject();
-			}
-		});
-	});
+    return new Promise((resovle, reject) => {
+        request(getRequestOptions('/users/' + userLogin + '/repos'), (error, response, body) => {
+            if (!error && response.statusCode == 200) {
+                resovle(JSON.parse(body));
+            } else {
+                reject({
+                    error: error,
+                    status: response.statusCode,
+                });
+            }
+        });
+    });
 }
 
 ///repos/hirsch88/angular-bootstrap-slider/languages
 function getUserRepoLang(userLogin, repoName) {
-	return new Promise((resovle, reject) => {
-		request(getRequestOptions('/repos/' + userLogin + '/' + repoName + '/languages'), (error, response, body) => {
-			if (!error && response.statusCode == 200) {
-				resovle(JSON.parse(body));
-			} else {
-				reject();
-			}
-		});
-	});
+    return new Promise((resovle, reject) => {
+        request(getRequestOptions('/repos/' + userLogin + '/' + repoName + '/languages'), (error, response, body) => {
+            if (!error && response.statusCode == 200) {
+                resovle(JSON.parse(body));
+            } else {
+                reject({
+                    error: error,
+                    status: response.statusCode,
+                });
+            }
+        });
+    });
 }
 
 // function getRepos(done) {
@@ -143,80 +152,80 @@ function getUserRepoLang(userLogin, repoName) {
 // }
 
 function getRequestOptions(path) {
-	return {
-		url: 'https://api.github.com' + path,
-		headers: {
-			'User-Agent': 'request'
-		}
-	}
+    return {
+        url: 'https://api.github.com' + path,
+        headers: {
+            'User-Agent': 'request'
+        }
+    }
 }
 
 function createGexfFile() {
-	var filename = 'github.gexf';
+    var filename = 'github.gexf';
 
-	myGexf.addNode({
-		id: 'n01',
-		label: 'myFirstNode',
-		attributes: {
-			name: 'John',
-			surname: 'Silver'
-		},
-		viz: {
-			color: 'rgb(255, 234, 45)'
-		}
-	});
+    myGexf.addNode({
+        id: 'n01',
+        label: 'myFirstNode',
+        attributes: {
+            name: 'John',
+            surname: 'Silver'
+        },
+        viz: {
+            color: 'rgb(255, 234, 45)'
+        }
+    });
 
-	myGexf.addNode({
-		id: 'n02',
-		label: 'myFirstNode',
-		attributes: {
-			name: 'John',
-			surname: 'Doe'
-		},
-		viz: {
-			color: 'rgb(45, 234, 45)'
-		}
-	});
+    myGexf.addNode({
+        id: 'n02',
+        label: 'myFirstNode',
+        attributes: {
+            name: 'John',
+            surname: 'Doe'
+        },
+        viz: {
+            color: 'rgb(45, 234, 45)'
+        }
+    });
 
-	myGexf.addEdge({
-		id: 'e01',
-		source: 'n02',
-		target: 'n01',
-		attributes: {
-			predicate: 'LIKES'
-		},
-		viz: {
-			thickness: 34
-		}
-	});
+    myGexf.addEdge({
+        id: 'e01',
+        source: 'n02',
+        target: 'n01',
+        attributes: {
+            predicate: 'LIKES'
+        },
+        viz: {
+            thickness: 34
+        }
+    });
 
-	myGexf.addEdge({
-		id: 'e01',
-		source: 'n01',
-		target: 'n02',
-		attributes: {
-			predicate: 'LIKES'
-		},
-		viz: {
-			thickness: 100
-		}
-	});
+    myGexf.addEdge({
+        id: 'e01',
+        source: 'n01',
+        target: 'n02',
+        attributes: {
+            predicate: 'LIKES'
+        },
+        viz: {
+            thickness: 100
+        }
+    });
 
-	// As a document
-	var gephiAsJson = myGexf.document;
+    // As a document
+    var gephiAsJson = myGexf.document;
 
-	// As a string
-	var gephiAsXml = myGexf.serialize();
-	fs.exists(filename, (exists) => {
-		if (exists) {
-			fs.unlink(filename, (err) => {
-				if (err) throw err;
-				logger.info('successfully deleted');
-			});
-		}
-		fs.writeFile(filename, gephiAsXml, (err) => {
-			if (err) throw err;
-			logger.info('It\'s saved!');
-		});
-	});
+    // As a string
+    var gephiAsXml = myGexf.serialize();
+    fs.exists(filename, (exists) => {
+        if (exists) {
+            fs.unlink(filename, (err) => {
+                if (err) throw err;
+                logger.info('successfully deleted');
+            });
+        }
+        fs.writeFile(filename, gephiAsXml, (err) => {
+            if (err) throw err;
+            logger.info('It\'s saved!');
+        });
+    });
 }
