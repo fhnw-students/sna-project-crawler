@@ -27,7 +27,15 @@ class User {
 
 }
 
-const users = [];
+let data = [];
+getAllUsers({
+	limit: 10
+})
+	.then((users) => {
+		logger.info('DONE!', users.length);
+		data = users;
+	})
+
 getUser('dweber019')
 	.then((user) => {
 		let newUser = new User(user.login, user.name);
@@ -48,6 +56,31 @@ getUser('dweber019')
 			});
 		});
 	});
+
+
+function getAllUsers(options) {
+	return new Promise((resolve, reject) => {
+
+
+	});
+}
+
+// since last id
+function getUsers(since) {
+	return new Promise((resovle) => {
+		let path = '/users';
+		if (!!since) {
+			path += '?since=' + since;
+		}
+		request(getRequestOptions(path), (error, response, body) => {
+			if (!error && response.statusCode == 200) {
+				resovle(JSON.parse(body));
+			} else {
+				reject();
+			}
+		});
+	});
+}
 
 
 // getUser(name, (user) => {
