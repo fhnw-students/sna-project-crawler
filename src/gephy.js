@@ -1,5 +1,6 @@
 const fs = require('fs');
 const gexf = require('gexf');
+const logger = require('../src/logger');
 /////////////////////////////
 const myGexf = gexf.create({
 	defaultEdgeType: "directed",
@@ -23,19 +24,20 @@ const myGexf = gexf.create({
 /////////////////////////////
 
 exports.createFile = (users) => {
-	createGexfFile();
+	createGexfFile(users);
 };
 
-function createGexfFile() {
+function createGexfFile(users) {
 	var filename = 'github.gexf';
 	var addedLangs = [];
 
 	users.forEach((user) => {
+		var fullname = user.fullname != null ? user.fullname : '';
 		myGexf.addNode({
 			id: user.login,
 			label: user.login,
 			attributes: {
-				fullname: user.name
+				fullname: fullname
 			},
 			viz: {
 				color: 'rgb(255, 234, 45)'
@@ -56,11 +58,24 @@ function createGexfFile() {
 				});
 			}
 			myGexf.addEdge({
-				id: user.login + lang,
+				id: user.login + '-' + lang,
 				source: user.login,
 				target: lang,
 				attributes: {
-					predicate: 'LIKES'
+					predicate: 'USES'
+				},
+				viz: {
+					thickness: 34
+				}
+			});
+		});
+		user.followers.forEach((follower) => {
+			myGexf.addEdge({
+				id: follower + '-' + user.login,
+				source: follower,
+				target: user.login,
+				attributes: {
+					predicate: 'FOLLOWS'
 				},
 				viz: {
 					thickness: 34

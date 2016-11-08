@@ -14,7 +14,7 @@ github
             logger.info('[Data] > users.json');
         });
 
-        //gephy.createFile(users);
+        gephy.createFile(users);
     })
     .catch(logger.error);
 
