@@ -1,6 +1,6 @@
 const fs = require('fs');
 const gexf = require('gexf');
-const logger = require('../src/logger');
+const logger = require('./logger');
 /////////////////////////////
 const myGexf = gexf.create({
 	defaultEdgeType: "directed",
@@ -24,6 +24,7 @@ const myGexf = gexf.create({
 /////////////////////////////
 
 exports.createFile = (users) => {
+	logger.info('[Gephy] Starting');
 	createGexfFile(users);
 };
 
