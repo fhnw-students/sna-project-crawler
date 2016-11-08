@@ -21,7 +21,7 @@ exports.run = (_login, _limit) => {
 
 const getUser = (login) => {
 	return new Promise((resolve, reject) => {
-		if (counter < limit) {
+		if (counter < limit && !isUserAlreadyCrawled(login)) {
 			counter++;
 			logger.info('[getUser]', login, counter + '/' + limit);
 			requestUser(login)
@@ -46,6 +46,11 @@ const getUser = (login) => {
 			resolve({});
 		}
 	});
+};
+
+const isUserAlreadyCrawled = (login) => {
+	let logins = users.map(user => user.login);
+	return logins.indexOf('login') >= 0;
 };
 
 const addUser = (login, fullname) => {
