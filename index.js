@@ -27,15 +27,17 @@ prompt.get([
         logger.info('[Crawler] Starting for user ' + results.githubName);
         github
             .run(results.githubName, results.limit)
-            .then((users) => {
-                logger.info('[Crawler] Finished');
-                fs.writeFile('users.json', JSON.stringify(users), (err) => {
-                    if (err) return logger.error(err);
-                    logger.info('[Data] > users.json');
-                });
-
-                //gephy.createFile(users);
-            })
+            .then(writeJsonFile)
+            .then(gephy.createFile)
             .catch(logger.error);
     }
 });
+
+function writeJsonFile(users) {
+    logger.info('[Crawler] Finished');
+    fs.writeFile('users.json', JSON.stringify(users), (err) => {
+        if (err) return logger.error(err);
+        logger.info('[Data] > users.json');
+    });
+    return users;
+}
