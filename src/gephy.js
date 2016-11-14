@@ -142,12 +142,12 @@ function createGexfFile(users) {
 		if (exists) {
 			fs.unlink(filename, (err) => {
 				if (err) throw err;
-				logger.info('successfully deleted');
+				logger.info('[Gephy] successfully deleted');
 			});
 		}
 		fs.writeFile(filename, gephiAsXml, (err) => {
 			if (err) throw err;
-			logger.info('It\'s saved!');
+			logger.info('[Gephy] It\'s saved!');
 		});
 	});
 

@@ -26,10 +26,10 @@ prompt.get([
   } else {
     logger.info('[Crawler] Starting for user ' + results.githubName);
     github
-      .run(results.githubName, results.limit)
-      .then(writeUserJsonFile)
-      .then(gephy.createFile)
-      .catch(logger.error);
+      .run(results.githubName, results.limit, (users) => {
+        writeUserJsonFile(users);
+        gephy.createFile(users);
+      });
   }
 });
 

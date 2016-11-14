@@ -6,46 +6,86 @@ const logger = require('./logger');
 const clientId = "49ef8fc6320cc83640b6";
 const clientSecret = "b0734f6c9c1a28472ee2a03151e204c3621a1e4a";
 
+// const clientId = "104e961db0a813bb5941";
+// const clientSecret = "324cb05d0a683b51984ae2ae392648bcf93d1010";
+
 let users = [];
 let limit = 100;
 let counter = 0;
+let queue = [];
+let done;
 
-exports.run = (_login, _limit) => {
-	return new Promise((resolve, reject) => {
+exports.run = (_login, _limit, _done) => {
 		limit = _limit;
-		getUser(_login)
-			.then(() => resolve(users))
-			.catch(logger.error);
+		done = _done;
+		logger.info('[Github] Starting');
+		queue.push(getUser(_login));
+		next();
+};
+
+const next = (_login, _limit) => {
+	return new Promise((resolve, reject) => {
+		if (counter < limit && queue.length !== 0) {
+			logger.info('[TASK] Starting', queue.length);
+			let task = queue.shift();
+			if (_.isFunction(task)) {
+				task()
+					.then(() => {
+						logger.info('[TASK] Finished');
+						return next();
+					})
+					.catch((e) => {
+						logger.error('[TASK] Error', e);
+					});
+			} else {
+				next();
+			}
+		} else {
+			logger.info('[Github] Finished');
+			if (done) {
+				done(users);
+			}
+			resolve();
+		}
 	});
 };
 
 const getUser = (login) => {
-	return new Promise((resolve, reject) => {
-		if (counter < limit && !isUserAlreadyCrawled(login)) {
-			counter++;
-			logger.info('[getUser]', login, counter + '/' + limit);
-			requestUser(login)
-				.then(user => addUser(user.login, user.name))
-				.then(user => Promise.all([
-					addFollowers(user),
-					addLangs(user)
-				]))
-				.then(a => a[0])
-				.then(user => {
-					if (counter < limit) {
-						return Promise.all(
-							user.followers.map((followerLogin) => getUser(followerLogin))
-						)
-					} else {
-						return user;
-					}
-				})
-				.then(resolve)
-				.catch(reject);
-		} else {
-			resolve({});
-		}
-	});
+	return function () {
+		return new Promise((resolve, reject) => {
+			if (counter < limit && !isUserAlreadyCrawled(login)) {
+				counter++;
+				logger.info('[getUser]', login, counter + '/' + limit);
+				requestUser(login)
+					.then(user => addUser(user.login, user.name))
+					.then(user => Promise.all([
+						addFollowers(user),
+						addLangs(user)
+					]))
+					.then(a => a[0])
+					.then(user => {
+						if (counter < limit) {
+							user.followers.forEach((followerLogin) => {
+								addTask(followerLogin, getUser(followerLogin));
+							});
+							return user;
+						} else {
+							return user;
+						}
+					})
+					.then(resolve)
+					.catch(reject);
+			} else {
+				resolve({});
+			}
+		});
+	}
+};
+
+const addTask = (login, task) => {
+	if (!isUserAlreadyCrawled(login)) {
+		queue.push(task);
+	}
 };
 
 const isUserAlreadyCrawled = (login) => {
@@ -108,13 +148,22 @@ const requestUserFollowers = (login) => {
 const _request = (path) => {
 	return new Promise((resolve, reject) => {
 		request(getRequestOptions(path), (error, response, body) => {
-			logger.info('[HTTP]', response.statusCode + ' GET ' + path);
-			if (!error && response.statusCode == 200) {
+			let statusCode = 0;
+			if (error) {
+				logger.error(`[HTTP]`, path, error, body);
+			}
+			if (response && response.statusCode) {
+				statusCode = response.statusCode;
+				logger.info('[HTTP]', response.statusCode + ' GET ' + path);
+			} else {
+				logger.warn(`[HTTP]`, path, error, response, body);
+			}
+			if (!error && statusCode == 200) {
 				resolve(JSON.parse(body));
 			} else {
 				reject({
 					error: error,
-					status: response.statusCode,
+					status: statusCode,
 				});
 			}
 		});
