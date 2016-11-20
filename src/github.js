@@ -3,19 +3,19 @@ const _ = require('lodash');
 
 const logger = require('./logger');
 
-const clientId = "49ef8fc6320cc83640b6";
-const clientSecret = "b0734f6c9c1a28472ee2a03151e204c3621a1e4a";
+// const clientId = "49ef8fc6320cc83640b6";
+// const clientSecret = "b0734f6c9c1a28472ee2a03151e204c3621a1e4a";
 
 const GITHUB_REQUEST_LIMIT_PER_MS = (60 * 60 * 1000) / 5000;
 
-// const clientId = "104e961db0a813bb5941";
-// const clientSecret = "324cb05d0a683b51984ae2ae392648bcf93d1010";
+const clientId = "104e961db0a813bb5941";
+const clientSecret = "324cb05d0a683b51984ae2ae392648bcf93d1010";
 
 let users = [];
 let limit = 100;
 let counter = 0;
 let counterRequest = 0;
-let taskId = 0;
+let taskId = 1;
 let queue = [];
 let done;
 let start = new Date();
