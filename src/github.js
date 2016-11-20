@@ -52,8 +52,13 @@ const nextTask = () => {
 const getUserTask = (login) => {
 	return (done) => {
 
-		if (counter >= limit || isUserAlreadyCrawled(login)) {
-			logger.info('[USER] Limit reached! ', counter + '/' + limit);
+		if (isUserAlreadyCrawled(login)) {
+			logger.warn('[USER] Already requested! ', login);
+			return done();
+		}
+
+		if (counter >= limit) {
+			logger.warn('[USER] Limit reached! ', counter + '/' + limit);
 			return done();
 		}
 
@@ -104,7 +109,7 @@ const getUserFollowers = (index) => (done) => {
 
 const isUserAlreadyCrawled = (login) => {
 	let logins = users.map(user => user.login);
-	return logins.indexOf('login') >= 0;
+	return logins.indexOf(login) >= 0;
 };
 
 const addUser = (u) => {
