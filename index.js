@@ -27,6 +27,7 @@ prompt.get([
     logger.info('[Crawler] Starting for user ' + results.githubName);
     github
       .run(results.githubName, results.limit, (users) => {
+      // .run('hirsch88', 10, (users) => {
         writeUserJsonFile(users);
         gephy.createFile(users);
       });
