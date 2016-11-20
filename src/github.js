@@ -42,7 +42,7 @@ const nextTask = () => {
 		});
 	} else {
 		let now = new Date();
-		logger.info('[Github] Finished ' + counterRequest + ' in ' + (Math.abs(now - start) / 1000) / 60 + 'sec');
+		logger.info('[Github] Finished ' + counterRequest + ' in ' + (Math.abs(now - start) / 1000) / 60 + 'min');
 		if (_.isFunction(done)) {
 			done(users);
 		}
