@@ -1,46 +1,32 @@
-const prompt = require('prompt');
 const fs = require('fs');
-
-const logger = require('./src/logger');
-const github = require('./src/github');
-const gephy = require('./src/gephy');
 const _ = require('lodash');
 
-prompt.start();
-prompt.get([
-  {
-    name: 'githubName',
-    description: 'Enter a github username',
-    type: 'string',
-    required: true
-  },
-  {
-    name: 'limit',
-    description: 'How many users should be crawled?',
-    type: 'number',
-    required: true
-  }
-], (err, results) => {
-  if (!_.isNumber(results.limit)) {
-    logger.error('Please enter a valid number for limit');
-  } else {
-    logger.info('[Crawler] Starting for user ' + results.githubName);
-    github
-      .run(results.githubName, results.limit, (users) => {
-      // .run('hirsch88', 10, (users) => {
-        writeUserJsonFile(users);
-        gephy.createFile(users);
-      });
-  }
-});
+const logger = require('./src/logger');
+const github = require('./src/github/index');
+const gephy = require('./src/gephy');
 
-function writeUserJsonFile(users) {
-  logger.info('[Crawler] Finished');
-  return new Promise((resolve, reject) => {
-    fs.writeFile('users.json', JSON.stringify(users), (err) => {
-      if (err) return logger.error(err);
-      logger.info('[Data] > users.json');
-      resolve(users);
+github
+    .run([
+        'fhnw-students',
+        'w3tecch'
+    ], (data) => {
+        logger.info('[Crawler] Finished');
+        // gephy.createFile(data);
     });
-  });
-}
+
+// function writeJsonFile(data) {
+//     return new Promise((resolve, reject) => {
+//         fs.writeFile(`${NAME}.json`, JSON.stringify(data), (err) => {
+//             if (err) return logger.error(err);
+//             logger.info('[Data] > ' + NAME + '.json');
+//             resolve(data);
+//         });
+//     });
+// }
+
+// const data = require('./src/github/data');
+// data.save().then((a)=>{
+//     console.log(a);
+// }).catch(err => {
+//     console.log(err);
+// });
