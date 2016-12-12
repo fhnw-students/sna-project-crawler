@@ -1,46 +1,43 @@
-const prompt = require('prompt');
 const fs = require('fs');
-
-const logger = require('./src/logger');
-const github = require('./src/github');
-const gephy = require('./src/gephy');
 const _ = require('lodash');
 
-prompt.start();
-prompt.get([
-  {
-    name: 'githubName',
-    description: 'Enter a github username',
-    type: 'string',
-    required: true
-  },
-  {
-    name: 'limit',
-    description: 'How many users should be crawled?',
-    type: 'number',
-    required: true
-  }
-], (err, results) => {
-  if (!_.isNumber(results.limit)) {
-    logger.error('Please enter a valid number for limit');
-  } else {
-    logger.info('[Crawler] Starting for user ' + results.githubName);
-    github
-      .run(results.githubName, results.limit, (users) => {
-      // .run('hirsch88', 10, (users) => {
-        writeUserJsonFile(users);
-        gephy.createFile(users);
-      });
-  }
-});
+const logger = require('./src/logger');
+const github = require('./src/github/index');
+const githubData = require('./src/github/data');
+const gephy = require('./src/gephy');
 
-function writeUserJsonFile(users) {
-  logger.info('[Crawler] Finished');
-  return new Promise((resolve, reject) => {
-    fs.writeFile('users.json', JSON.stringify(users), (err) => {
-      if (err) return logger.error(err);
-      logger.info('[Data] > users.json');
-      resolve(users);
+github
+    .run([
+        'tamediadigital',
+        'CERN',
+        'Roche',
+        'swisscom',
+        'Zuehlke',
+        'SchweizerischeBundesbahnen',
+        'adfinis-sygroup',
+        'srfdata',
+        '20Minuten',
+        'nzzdev',
+        'FHNW',
+        'local-ch',
+        'migros',
+        'tutti-ch',
+        'softwarebrauerei',
+        'swisstxt',
+        'ventoo',
+        'wireapp',
+        'admin-ch',
+        'opendata-swiss',
+        'swissmedical',
+        'swisspush',
+        'swiss-virtual',
+        'cyon',
+        'METANETAG',
+        'axa-ch',
+        'vshn',
+        'alv-ch',
+        'ogdch',
+        'geoadmin'
+    ], (data) => {
+        logger.info('[Crawler] Finished');
     });
-  });
-}

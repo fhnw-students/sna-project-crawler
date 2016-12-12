@@ -10,6 +10,11 @@ const myGexf = gexf.create({
 				id: "fullname",
 				type: "string",
 				title: "users's fullname"
+			},
+			{
+				id: "type",
+				type: "string",
+				title: "node type"
 			}
 		],
 		edge: [
@@ -33,15 +38,16 @@ function createGexfFile(users) {
 	var addedLangs = [];
 
 	users.forEach((user) => {
-		var fullname = user.fullname != null ? user.fullname : '';
+		var fullname = user.description != null ? user.description : user.login;
 		myGexf.addNode({
 			id: user.login,
 			label: user.login,
 			attributes: {
-				fullname: fullname
+				fullname: fullname,
+				type: user.type
 			},
 			viz: {
-				color: 'rgb(255, 234, 45)'
+				color: user.type === 'User' ? 'rgb(253, 113, 205)' : 'rgb(255, 234, 45)'
 			}
 		});
 		user.langs.forEach((lang) => {
@@ -51,7 +57,8 @@ function createGexfFile(users) {
 					id: lang,
 					label: lang,
 					attributes: {
-						fullname: lang
+						fullname: lang,
+						type: 'lang'
 					},
 					viz: {
 						color: 'rgb(45, 234, 45)'
@@ -77,6 +84,19 @@ function createGexfFile(users) {
 				target: user.login,
 				attributes: {
 					predicate: 'FOLLOWS'
+				},
+				viz: {
+					thickness: 34
+				}
+			});
+		});
+		user.contributers.forEach((follower) => {
+			myGexf.addEdge({
+				id: follower + '-' + user.login,
+				source: follower,
+				target: user.login,
+				attributes: {
+					predicate: 'CONTRIBUTES'
 				},
 				viz: {
 					thickness: 34
