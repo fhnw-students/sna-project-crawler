@@ -9,8 +9,8 @@ const gephy = require('./src/gephy');
 github
     .run([
         //'tamediadigital', // 3883 in 78.88895000000001 min
-        'CERN',
-        // 'Roche',
+        // 'CERN', // 273 5.243033333333333 min
+        'Roche',
         // 'swisscom',
         // 'Zuehlke',
         // 'SchweizerischeBundesbahnen',
