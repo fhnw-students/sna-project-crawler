@@ -10,8 +10,8 @@ github
     .run([
         //'tamediadigital', // 3883 in 78.88895000000001 min
         // 'CERN', // 273 5.243033333333333 min
-        'Roche',
-        // 'swisscom',
+        // 'Roche', // 1830 32.601483333333334 min
+        'swisscom',
         // 'Zuehlke',
         // 'SchweizerischeBundesbahnen',
         // 'adfinis-sygroup',
