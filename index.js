@@ -11,8 +11,8 @@ github
         //'tamediadigital', // 3883 in 78.88895000000001 min
         // 'CERN', // 273 5.243033333333333 min
         // 'Roche', // 1830 32.601483333333334 min
-        'swisscom',
-        // 'Zuehlke',
+        // 'swisscom', // 3293 58.06623333333334 min
+        'Zuehlke',
         // 'SchweizerischeBundesbahnen',
         // 'adfinis-sygroup',
         // 'srfdata',
