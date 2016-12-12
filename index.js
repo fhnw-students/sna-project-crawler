@@ -8,8 +8,36 @@ const gephy = require('./src/gephy');
 
 github
     .run([
-        'fhnw-students',
-        'w3tecch'
+        'tamediadigital',
+        'CERN',
+        'Roche',
+        'swisscom',
+        'Zuehlke',
+        'SchweizerischeBundesbahnen',
+        'adfinis-sygroup',
+        'srfdata',
+        '20Minuten',
+        'nzzdev',
+        'FHNW',
+        'local-ch',
+        'migros',
+        'tutti-ch',
+        'softwarebrauerei',
+        'swisstxt',
+        'ventoo',
+        'wireapp',
+        'admin-ch',
+        'opendata-swiss',
+        'swissmedical',
+        'swisspush',
+        'swiss-virtual',
+        'cyon',
+        'METANETAG',
+        'axa-ch',
+        'vshn',
+        'alv-ch',
+        'ogdch',
+        'geoadmin'
     ], (data) => {
         logger.info('[Crawler] Finished');
         gephy.createFile(githubData.getAll());
