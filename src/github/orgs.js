@@ -2,7 +2,6 @@ const _ = require('lodash');
 
 const githubRequest = require('./request');
 const githubData = require('./data');
-const githubUsers = require('./users');
 const taskRunner = require('./task-runner');
 const logger = require('../logger');
 

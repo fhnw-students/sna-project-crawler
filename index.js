@@ -42,3 +42,12 @@ github
         logger.info('[Crawler] Finished');
         gephy.createFile(githubData.getAll());
     });
+
+/**
+ * Test Gepy
+ */
+// fs.readFile('./data/2016-11-11.json', 'utf8', (err, data) => {
+//     if (err) throw err; // we'll not consider error handling for now
+//     var obj = JSON.parse(data);
+//     gephy.createFile(obj);
+// });
