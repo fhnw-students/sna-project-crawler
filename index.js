@@ -15,8 +15,8 @@ github
         // 'Zuehlke', // 1370 25.068916666666667 min
         // 'SchweizerischeBundesbahnen', // 3727 43.10825 min
         // 'adfinis-sygroup', // 644 6.996383333333333 min
-        'srfdata',
-        // '20Minuten',
+        // 'srfdata', // 989 11.478250000000001 min
+        '20Minuten',
         // 'nzzdev',
         // 'FHNW',
         // 'local-ch',
