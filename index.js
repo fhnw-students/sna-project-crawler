@@ -13,8 +13,8 @@ github
         // 'Roche', // 1830 32.601483333333334 min
         // 'swisscom', // 3293 58.06623333333334 min
         // 'Zuehlke', // 1370 25.068916666666667 min
-        'SchweizerischeBundesbahnen',
-        // 'adfinis-sygroup',
+        // 'SchweizerischeBundesbahnen', // 3727 43.10825 min
+        'adfinis-sygroup',
         // 'srfdata',
         // '20Minuten',
         // 'nzzdev',
