@@ -7,8 +7,17 @@
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "Launch Program",
+			"name": "Launch Crawler",
 			"program": "${workspaceRoot}/index.js",
+			"cwd": "${workspaceRoot}",
+			"outFiles": [],
+			"sourceMaps": true
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Launch Merge",
+			"program": "${workspaceRoot}/merge.js",
 			"cwd": "${workspaceRoot}",
 			"outFiles": [],
 			"sourceMaps": true

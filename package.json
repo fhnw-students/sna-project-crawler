@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "build": "node gephy.js"
+    "merge": "node merge.js",
+    "gephy": "node gephy.js"
   },
   "repository": {
     "type": "git",
