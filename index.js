@@ -16,8 +16,8 @@ github
         // 'SchweizerischeBundesbahnen', // 3727 43.10825 min
         // 'adfinis-sygroup', // 644 6.996383333333333 min
         // 'srfdata', // 989 11.478250000000001 min
-        '20Minuten',
-        // 'nzzdev',
+        // '20Minuten', // 20 0.23249999999999998 min
+        'nzzdev',
         // 'FHNW',
         // 'local-ch',
         // 'migros',
