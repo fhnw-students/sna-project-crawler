@@ -14,8 +14,8 @@ github
         // 'swisscom', // 3293 58.06623333333334 min
         // 'Zuehlke', // 1370 25.068916666666667 min
         // 'SchweizerischeBundesbahnen', // 3727 43.10825 min
-        'adfinis-sygroup',
-        // 'srfdata',
+        // 'adfinis-sygroup', // 644 6.996383333333333 min
+        'srfdata',
         // '20Minuten',
         // 'nzzdev',
         // 'FHNW',
