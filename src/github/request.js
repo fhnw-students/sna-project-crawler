@@ -14,6 +14,12 @@ const clients = [
 	}, {
 		id: "104e961db0a813bb5941",
 		secret: "324cb05d0a683b51984ae2ae392648bcf93d1010",
+	}, {
+		id: "56d7e665339a1413bd8a",
+		secret: "14f321931129a3d516e8faa78e589fbebc7dc154",
+	}, {
+		id: "739012d923bd28103136",
+		secret: "6c6afbd259ee58713094a70dcd37cecca544771d",
 	}
 ];
 /**
