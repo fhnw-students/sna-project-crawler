@@ -3,8 +3,26 @@ const _ = require('lodash');
 const githubRequest = require('./request');
 const githubData = require('./data');
 const taskRunner = require('./task-runner');
+const logger = require('../logger');
 
 let users = [];
+let repos = {};
+let countUserDublicates = 0;
+let countRepoDublicates = 0;
+
+const buildKey = (login, repoName) => `${login}__${repoName}`;
+
+const getRepo = (login, repoName) => {
+  let langs = repos[buildKey(login, repoName)];
+  if (_.isArray(langs)) {
+    return langs;
+  }
+  return false;
+};
+
+const addRepo = (login, repoName, langs) => {
+  repos[buildKey(login, repoName)] = langs;
+};
 
 const getUserFollowers = (index) => (done) => {
   let user = githubData.get(index);
@@ -35,6 +53,7 @@ const getUserRepos = (index) => (done) => {
 const getUser = (index) => (done) => {
   let user = githubData.get(index);
   if (users.indexOf(user.login) >= 0) {
+    logger.warn(`[USER] "${user.login}" already fetchted! `, ++countUserDublicates);
     return done();
   }
   users.push(user.login);
@@ -45,49 +64,50 @@ const getUser = (index) => (done) => {
       user.description = userData.name;
 
       // 1. get repo from the user
-      taskRunner.add(`User(${user.login}).Repo`, getUserRepos(index));
+      taskRunner.add(`User(${user.login}).getRepos()`, getUserRepos(index));
 
       // 2. get followers of this user -> org
-      taskRunner.add(`User(${user.login}).Followers`, getUserFollowers(index));
+      taskRunner.add(`User(${user.login}).getFollowers()`, getUserFollowers(index));
 
     })
     .then(done)
     .catch(done);
 };
 
-const getOrgsRepoLangs = (index, repoName) => {
-  return (done) => {
-    let org = githubData.get(index);
+const getRepoLangs = (index, login, repoName) => (done) => {
+  let repoLangs = getRepo(login, repoName);
+  if (repoLangs === false) {
     githubRequest
-      .getRepoLangs(org.login, repoName)
-      .then(langs => githubData.addLangs(index, _.keys(langs)))
+      .getRepoLangs(login, repoName)
+      .then(langs => _.keys(langs))
+      .then(langs => {
+        githubData.addLangs(index, langs);
+        addRepo(login, repoName, langs);
+      })
       .then(githubData.save())
       .then(done)
       .catch(done);
-  };
+  } else {
+    logger.warn(`[REPO] "${repoName}" already fetchted! `, ++countRepoDublicates);
+    githubData.addLangs(index, repoLangs);
+    githubData.save()
+      .then(done)
+      .catch(done);
+  }
 };
 
-const getUserRepoLangs = (index, repoName) => {
-  return (done) => {
-    let user = githubData.get(index);
-    githubRequest
-      .getRepoLangs(user.login, repoName)
-      .then(langs => githubData.addLangs(index, _.keys(langs)))
-      .then(githubData.save())
-      .then(done)
-      .catch(done);
-  };
+const getOrgsRepoLangs = (index, repoName) => (done) => {
+  let org = githubData.get(index);
+  getRepoLangs(index, org.login, repoName)(done);
 };
-const getContributerRepoLangs = (index, org, repoName) => {
-  return (done) => {
-    let user = githubData.get(index);
-    githubRequest
-      .getRepoLangs(org.login, repoName)
-      .then(langs => githubData.addLangs(index, _.keys(langs)))
-      .then(githubData.save())
-      .then(done)
-      .catch(done);
-  };
+
+const getUserRepoLangs = (index, repoName) => (done) => {
+  let user = githubData.get(index);
+  getRepoLangs(index, user.login, repoName)(done);
+};
+
+const getContributerRepoLangs = (index, org, repoName) => (done) => {
+  getRepoLangs(index, org.login, repoName)(done);
 };
 
 const getRepoContributers = (index, repoName) => {
@@ -102,7 +122,7 @@ const getRepoContributers = (index, repoName) => {
           githubData.addOrganisations(idx, [org]);
 
           // 1. get reops from this org
-          taskRunner.add(`Org(${c.login}).Repo(${repoName}).getLangs()`, getContributerRepoLangs(idx, org, repoName));
+          taskRunner.add(`Org(${org.login}).Repo(${repoName}).Contributer(${c.login}).getLangs()`, getContributerRepoLangs(idx, org, repoName));
 
           // 2. get user infos like fullname and other orgs
           taskRunner.add(`User(${c.login})`, getUser(idx));
