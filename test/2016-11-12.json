@@ -1,0 +1,169 @@
+[
+  {
+    "login": "fhnw-students",
+    "description": "A collection of projects during the education at fhnw",
+    "type": "Organisation",
+    "repos": [
+      "oop2-project",
+      "fhnw-documents",
+      "fhnw-webec-controlling-frontend",
+      "fhnw-webec-controlling-backend",
+      "cpp-animals",
+      "sna-project-crawler",
+      "haskell-cheatsheet",
+      "stqm-summary"
+    ],
+    "langs": [
+      "Java",
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "PHP",
+      "ApacheConf",
+      "C++"
+    ],
+    "organisations": [],
+    "contributers": [
+      "hirsch88",
+      "davidheimgartner",
+      "Brunn3r",
+      "keniseli"
+    ],
+    "followers": []
+  },
+  {
+    "login": "hirsch88",
+    "description": "Gery Hirschfeld",
+    "type": "User",
+    "repos": [
+      "angular-bootstrap-slider",
+      "aurelia-animator-velocity",
+      "aurelia-bootstrap-bridge",
+      "cf-sample-app-node",
+      "config-copy-files",
+      "demo-reveal",
+      "fhnw-depa-state",
+      "fhnw-prcpp-jni",
+      "fhnw-webec-jira-controlling",
+      "fhnw-webec-where-to-eat",
+      "generator-hirsch",
+      "hot-trophy-proto",
+      "hot-trophy-proto-dist",
+      "hot-trophy-server",
+      "imoech-getstarted",
+      "lineapro-phonegap-plugin",
+      "prcpp-my-string",
+      "skeleton-plugin-typescript",
+      "slush-hirsch",
+      "ui5-boilerplate",
+      "validation",
+      "wallaby-js-session"
+    ],
+    "langs": [
+      "Java",
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "PHP",
+      "ApacheConf",
+      "C++",
+      "TypeScript",
+      "MAXScript",
+      "CMake",
+      "Objective-C",
+      "Makefile",
+      "C"
+    ],
+    "organisations": [
+      "fhnw-students",
+      "w3tecch"
+    ],
+    "contributers": [],
+    "followers": [
+      "DaNautilus",
+      "nicregez",
+      "katunch",
+      "cusspvz",
+      "lukaslehmann",
+      "Tyderion",
+      "dweber019",
+      "Brunn3r",
+      "RvD23"
+    ]
+  },
+  {
+    "login": "davidheimgartner",
+    "description": null,
+    "type": "User",
+    "repos": [
+      "fhnw-webec-where-to-eat"
+    ],
+    "langs": [
+      "Java",
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "PHP",
+      "ApacheConf"
+    ],
+    "organisations": [
+      "fhnw-students"
+    ],
+    "contributers": [],
+    "followers": [
+      "Brunn3r"
+    ]
+  },
+  {
+    "login": "Brunn3r",
+    "description": null,
+    "type": "User",
+    "repos": [],
+    "langs": [
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "PHP",
+      "ApacheConf"
+    ],
+    "organisations": [
+      "fhnw-students"
+    ],
+    "contributers": [],
+    "followers": [
+      "rogermatl",
+      "RvD23"
+    ]
+  },
+  {
+    "login": "keniseli",
+    "description": null,
+    "type": "User",
+    "repos": [
+      "depa_assignment_1_color_picker",
+      "depa_jdraw_assignment",
+      "fhnw_prcpp_jni",
+      "java_developer_vm",
+      "mada_1",
+      "mada_2",
+      "puzzlegenerator",
+      "stqm-summary"
+    ],
+    "langs": [
+      "Java",
+      "C++",
+      "CMake",
+      "Ruby",
+      "Shell",
+      "HTML"
+    ],
+    "organisations": [
+      "fhnw-students"
+    ],
+    "contributers": [],
+    "followers": [
+      "godstone",
+      "ChrisBlechschmidt"
+    ]
+  }
+]
