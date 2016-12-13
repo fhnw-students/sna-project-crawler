@@ -17,8 +17,8 @@ github
         // 'adfinis-sygroup', // 644 6.996383333333333 min
         // 'srfdata', // 989 11.478250000000001 min
         // '20Minuten', // 20 0.23249999999999998 min
-        'nzzdev',
-        // 'FHNW',
+        // 'nzzdev', // 5010 58.66296666666666 min
+        'FHNW',
         // 'local-ch',
         // 'migros',
         // 'tutti-ch',
