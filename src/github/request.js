@@ -4,23 +4,40 @@ const request = require('request');
 const logger = require('../logger');
 
 /**
- *
+ * Github Clients
  */
-const clientId = "49ef8fc6320cc83640b6";
-const clientSecret = "b0734f6c9c1a28472ee2a03151e204c3621a1e4a";
+let clientCounter = 0;
+const clients = [
+	{
+		id: "49ef8fc6320cc83640b6",
+		secret: "b0734f6c9c1a28472ee2a03151e204c3621a1e4a",
+	}, {
+		id: "104e961db0a813bb5941",
+		secret: "324cb05d0a683b51984ae2ae392648bcf93d1010",
+	}
+];
 /**
- *
+ * This is the pause we need to do between each requst to avoid the requst-limit
  */
-const GITHUB_REQUEST_LIMIT_PER_MS = (60 * 60 * 1000) / 5000;
+const GITHUB_REQUEST_LIMIT_PER_MS = ((60 * 60 * 1000) / 5000) / clients.length;
 /**
- *
+ * Counts the requests
  */
 let counterRequest = 0;
-
+/**
+ * Returns the client uri parameters for the upcoming request
+ */
 const getAuthParams = () => {
-	return `?client_id=${clientId}&client_secret=${clientSecret}`;
+	if (clientCounter < clients.length - 1) {
+		clientCounter++;
+	} else {
+		clientCounter = 0;
+	}
+	return `?client_id=${clients[clientCounter].id}&client_secret=${clients[clientCounter].secret}`;
 };
-
+/**
+ * Builds and returns a default requst header
+ */
 const getRequestOptions = (path) => {
 	return {
 		url: 'https://api.github.com' + path + getAuthParams(),
