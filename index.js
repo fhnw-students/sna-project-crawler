@@ -12,8 +12,8 @@ github
         // 'CERN', // 273 5.243033333333333 min
         // 'Roche', // 1830 32.601483333333334 min
         // 'swisscom', // 3293 58.06623333333334 min
-        'Zuehlke',
-        // 'SchweizerischeBundesbahnen',
+        // 'Zuehlke', // 1370 25.068916666666667 min
+        'SchweizerischeBundesbahnen',
         // 'adfinis-sygroup',
         // 'srfdata',
         // '20Minuten',
