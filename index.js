@@ -8,7 +8,7 @@ const gephy = require('./src/gephy');
 
 github
     .run([
-        //'tamediadigital', // 3883 in 78.88895000000001 min
+        // 'tamediadigital', // 3883 in 78.88895000000001 min
         // 'CERN', // 273 5.243033333333333 min
         // 'Roche', // 1830 32.601483333333334 min
         // 'swisscom', // 3293 58.06623333333334 min
@@ -20,8 +20,8 @@ github
         // 'nzzdev', // 5010 58.66296666666666 min
         // 'FHNW', // 4915 39.98151666666667 min
         // 'local-ch', 7437 66.4064 min
-        'migros',
-        // 'tutti-ch',
+        // 'migros', // 2440 20.562066666666666 min
+        'tutti-ch',
         // 'softwarebrauerei',
         // 'swisstxt',
         // 'ventoo',
