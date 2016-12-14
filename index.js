@@ -28,8 +28,8 @@ github
         // 'wireapp', // 2417 18.334966666666666 min
         // 'admin-ch', ERROR 443
         // 'opendata-swiss', // 659 5.145083333333333 min
-        'swissmedical',
-        // 'swisspush',
+        // 'swissmedical', // 168 1.3076833333333333 min
+        'swisspush',
         // 'swiss-virtual',
         // 'cyon',
         // 'METANETAG',
