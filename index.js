@@ -26,9 +26,9 @@ github
         // 'swisstxt', // 2597 20.9498 min
         // 'ventoo', // 686 5.4793666666666665 min
         // 'wireapp', // 2417 18.334966666666666 min
-        'admin-ch',
-        // 'opendata-swiss',
-        // 'swissmedical',
+        // 'admin-ch', ERROR 443
+        // 'opendata-swiss', // 659 5.145083333333333 min
+        'swissmedical',
         // 'swisspush',
         // 'swiss-virtual',
         // 'cyon',

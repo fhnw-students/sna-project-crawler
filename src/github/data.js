@@ -6,7 +6,7 @@ const logger = require('../logger');
 const PATH = 'data';
 const now = new Date();
 const buildFilename = () => {
-  return `${PATH}/admin-ch-${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}.json`;
+  return `${PATH}/swissmedical-${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}.json`;
 };
 
 const Node = (type, login, description) => ({
