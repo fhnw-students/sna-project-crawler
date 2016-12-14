@@ -23,8 +23,8 @@ github
         // 'migros', // 2440 20.562066666666666 min
         // 'tutti-ch', // 380 5.3346 min
         // 'softwarebrauerei', // 27 0.16568333333333335 min
-        'swisstxt',
-        // 'ventoo',
+        // 'swisstxt', // 2597 20.9498 min
+        'ventoo',
         // 'wireapp',
         // 'admin-ch',
         // 'opendata-swiss',
