@@ -25,8 +25,8 @@ github
         // 'softwarebrauerei', // 27 0.16568333333333335 min
         // 'swisstxt', // 2597 20.9498 min
         // 'ventoo', // 686 5.4793666666666665 min
-        'wireapp',
-        // 'admin-ch',
+        // 'wireapp', // 2417 18.334966666666666 min
+        'admin-ch',
         // 'opendata-swiss',
         // 'swissmedical',
         // 'swisspush',
