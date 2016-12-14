@@ -21,8 +21,8 @@ github
         // 'FHNW', // 4915 39.98151666666667 min
         // 'local-ch', 7437 66.4064 min
         // 'migros', // 2440 20.562066666666666 min
-        'tutti-ch',
-        // 'softwarebrauerei',
+        // 'tutti-ch', // 380 5.3346 min
+        'softwarebrauerei',
         // 'swisstxt',
         // 'ventoo',
         // 'wireapp',
