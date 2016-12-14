@@ -19,8 +19,8 @@ github
         // '20Minuten', // 20 0.23249999999999998 min
         // 'nzzdev', // 5010 58.66296666666666 min
         // 'FHNW', // 4915 39.98151666666667 min
-        'local-ch',
-        // 'migros',
+        // 'local-ch', 7437 66.4064 min
+        'migros',
         // 'tutti-ch',
         // 'softwarebrauerei',
         // 'swisstxt',
