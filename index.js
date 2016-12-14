@@ -24,8 +24,8 @@ github
         // 'tutti-ch', // 380 5.3346 min
         // 'softwarebrauerei', // 27 0.16568333333333335 min
         // 'swisstxt', // 2597 20.9498 min
-        'ventoo',
-        // 'wireapp',
+        // 'ventoo', // 686 5.4793666666666665 min
+        'wireapp',
         // 'admin-ch',
         // 'opendata-swiss',
         // 'swissmedical',
