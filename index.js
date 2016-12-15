@@ -34,8 +34,8 @@ github
         // 'cyon', // 3199 27.786116666666665 min
         // 'METANETAG', // 793 6.594383333333334 min
         // 'axa-ch', // 2995 25.140733333333333 min
-        'vshn',
-        // 'alv-ch',
+        // 'vshn', // 8045 68.86536666666666 min
+        'alv-ch',
         // 'ogdch',
         // 'geoadmin'
     ], (data) => {
