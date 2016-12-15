@@ -31,8 +31,8 @@ github
         // 'swissmedical', // 168 1.3076833333333333 min
         // 'swisspush', // 941 7.450950000000001 min
         // 'swiss-virtual', // 272 2.23 min
-        'cyon',
-        // 'METANETAG',
+        // 'cyon', // 3199 27.786116666666665 min
+        'METANETAG',
         // 'axa-ch',
         // 'vshn',
         // 'alv-ch',
