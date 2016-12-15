@@ -19,9 +19,6 @@ Thumbs.db
 # Typing #
 /typings/
 
-# Dist #
-/dist
-
 # Cordova #
 cordova/plugins
 cordova/platforms
