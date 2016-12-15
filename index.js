@@ -32,8 +32,8 @@ github
         // 'swisspush', // 941 7.450950000000001 min
         // 'swiss-virtual', // 272 2.23 min
         // 'cyon', // 3199 27.786116666666665 min
-        'METANETAG',
-        // 'axa-ch',
+        // 'METANETAG', // 793 6.594383333333334 min
+        'axa-ch',
         // 'vshn',
         // 'alv-ch',
         // 'ogdch',
