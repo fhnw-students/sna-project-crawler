@@ -36,8 +36,8 @@ github
         // 'axa-ch', // 2995 25.140733333333333 min
         // 'vshn', // 8045 68.86536666666666 min
         // 'alv-ch', // 2312 18.785500000000003 min
-        'ogdch',
-        // 'geoadmin'
+        // 'ogdch', // 1694 13.365433333333334 min
+        'geoadmin'
     ], (data) => {
         logger.info('[Crawler] Finished');
     });
