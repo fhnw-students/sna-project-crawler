@@ -30,8 +30,8 @@ github
         // 'opendata-swiss', // 659 5.145083333333333 min
         // 'swissmedical', // 168 1.3076833333333333 min
         // 'swisspush', // 941 7.450950000000001 min
-        'swiss-virtual',
-        // 'cyon',
+        // 'swiss-virtual', // 272 2.23 min
+        'cyon',
         // 'METANETAG',
         // 'axa-ch',
         // 'vshn',
