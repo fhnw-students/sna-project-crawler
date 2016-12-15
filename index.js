@@ -35,8 +35,8 @@ github
         // 'METANETAG', // 793 6.594383333333334 min
         // 'axa-ch', // 2995 25.140733333333333 min
         // 'vshn', // 8045 68.86536666666666 min
-        'alv-ch',
-        // 'ogdch',
+        // 'alv-ch', // 2312 18.785500000000003 min
+        'ogdch',
         // 'geoadmin'
     ], (data) => {
         logger.info('[Crawler] Finished');
