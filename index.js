@@ -29,8 +29,8 @@ github
         // 'admin-ch', ERROR 443
         // 'opendata-swiss', // 659 5.145083333333333 min
         // 'swissmedical', // 168 1.3076833333333333 min
-        'swisspush',
-        // 'swiss-virtual',
+        // 'swisspush', // 941 7.450950000000001 min
+        'swiss-virtual',
         // 'cyon',
         // 'METANETAG',
         // 'axa-ch',
