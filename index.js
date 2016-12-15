@@ -37,7 +37,7 @@ github
         // 'vshn', // 8045 68.86536666666666 min
         // 'alv-ch', // 2312 18.785500000000003 min
         // 'ogdch', // 1694 13.365433333333334 min
-        'geoadmin'
+        // 'geoadmin' // 2705 19.592466666666667 min
     ], (data) => {
         logger.info('[Crawler] Finished');
     });
