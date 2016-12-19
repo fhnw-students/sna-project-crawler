@@ -105,10 +105,6 @@ exports.getUserRepos = (login) => {
 	return _request('/users/' + login + '/repos');
 };
 
-exports.getUserOrgs = (login) => {
-	return _request('/users/' + login + '/orgs');
-};
-
 exports.getUserFollowers = (login) => {
 	return _request('/users/' + login + '/followers');
 };
