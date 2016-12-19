@@ -1,7 +1,6 @@
 # @w3tec
 
 # Logs #
-logs
 *.log
 *.log*
 
@@ -19,9 +18,6 @@ Thumbs.db
 
 # Typing #
 /typings/
-
-# Dist #
-/dist
 
 # Cordova #
 cordova/plugins

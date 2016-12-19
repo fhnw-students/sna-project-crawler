@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "merge": "node merge.js",
+    "gephy": "node gephy.js"
   },
   "repository": {
     "type": "git",

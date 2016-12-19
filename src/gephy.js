@@ -1,5 +1,6 @@
 const fs = require('fs');
 const gexf = require('gexf');
+const logger = require('./logger');
 /////////////////////////////
 const myGexf = gexf.create({
 	defaultEdgeType: "directed",
@@ -9,6 +10,11 @@ const myGexf = gexf.create({
 				id: "fullname",
 				type: "string",
 				title: "users's fullname"
+			},
+			{
+				id: "type",
+				type: "string",
+				title: "node type"
 			}
 		],
 		edge: [
@@ -23,22 +29,25 @@ const myGexf = gexf.create({
 /////////////////////////////
 
 exports.createFile = (users) => {
-	createGexfFile();
+	logger.info('[Gephy] Starting');
+	createGexfFile(users);
 };
 
-function createGexfFile() {
+function createGexfFile(users) {
 	var filename = 'github.gexf';
 	var addedLangs = [];
 
 	users.forEach((user) => {
+		var fullname = user.description != null ? user.description : user.login;
 		myGexf.addNode({
 			id: user.login,
 			label: user.login,
 			attributes: {
-				fullname: user.name
+				fullname: fullname,
+				type: user.type
 			},
 			viz: {
-				color: 'rgb(255, 234, 45)'
+				color: user.type === 'User' ? 'rgb(253, 113, 205)' : 'rgb(255, 234, 45)'
 			}
 		});
 		user.langs.forEach((lang) => {
@@ -48,7 +57,8 @@ function createGexfFile() {
 					id: lang,
 					label: lang,
 					attributes: {
-						fullname: lang
+						fullname: lang,
+						type: 'lang'
 					},
 					viz: {
 						color: 'rgb(45, 234, 45)'
@@ -56,11 +66,37 @@ function createGexfFile() {
 				});
 			}
 			myGexf.addEdge({
-				id: user.login + lang,
+				id: user.login + '-' + lang,
 				source: user.login,
 				target: lang,
 				attributes: {
-					predicate: 'LIKES'
+					predicate: 'USES'
+				},
+				viz: {
+					thickness: 34
+				}
+			});
+		});
+		user.followers.forEach((follower) => {
+			myGexf.addEdge({
+				id: follower + '-' + user.login,
+				source: follower,
+				target: user.login,
+				attributes: {
+					predicate: 'FOLLOWS'
+				},
+				viz: {
+					thickness: 34
+				}
+			});
+		});
+		user.contributers.forEach((follower) => {
+			myGexf.addEdge({
+				id: follower + '-' + user.login,
+				source: follower,
+				target: user.login,
+				attributes: {
+					predicate: 'CONTRIBUTES'
 				},
 				viz: {
 					thickness: 34
@@ -126,12 +162,12 @@ function createGexfFile() {
 		if (exists) {
 			fs.unlink(filename, (err) => {
 				if (err) throw err;
-				logger.info('successfully deleted');
+				logger.info('[Gephy] successfully deleted');
 			});
 		}
 		fs.writeFile(filename, gephiAsXml, (err) => {
 			if (err) throw err;
-			logger.info('It\'s saved!');
+			logger.info('[Gephy] It\'s saved!');
 		});
 	});
 

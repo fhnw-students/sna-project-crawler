@@ -12,6 +12,18 @@ npm install
 ```
 
 ## Run
+### To fetch the data
 ```
 npm start
 ```
+
+### Merges all fetchted data
+```
+npm run merge
+```
+
+### Build a gephy file from the merged data
+```
+npm run gephy
+```
+
